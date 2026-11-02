@@ -1,0 +1,48 @@
+name: emulator
+
+on:
+  workflow_dispatch:
+
+jobs:
+  shot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+      - run: gradle :app:assembleDebug --no-daemon
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - uses: ReactiveCircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          script: |
+            adb install -r app/build/outputs/apk/debug/app-debug.apk
+            adb shell am start -n com.dsh.ramwatch/.MainActivity
+            sleep 10
+            adb exec-out screencap -p > screen1.png
+            adb shell input tap 540 1490
+            sleep 2
+            adb shell input text "chrome"
+            sleep 3
+            adb shell input keyevent 111
+            sleep 1
+            adb exec-out screencap -p > screen2.png
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screens
+          path: screen*.png
