@@ -366,9 +366,15 @@ public class MainActivity extends Activity implements AppListAdapter.Listener {
         }
 
         adapter.setData(view);
-        tvEmpty.setText(query.isEmpty()
-                ? "没有可显示的应用"
-                : "没找到「" + query + "」");
+        if (view.isEmpty()) {
+            if (all.isEmpty()) {
+                tvEmpty.setText("没读到应用，点右上「刷新」再试");
+            } else if (!query.isEmpty()) {
+                tvEmpty.setText("没找到「" + query + "」");
+            } else {
+                tvEmpty.setText("只列第三方应用。点上面的「仅用户应用」切换成含系统应用");
+            }
+        }
         tvEmpty.setVisibility(view.isEmpty() ? View.VISIBLE : View.GONE);
 
         if (keepScroll) restoreScroll();

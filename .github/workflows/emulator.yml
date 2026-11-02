@@ -34,13 +34,16 @@ jobs:
             adb shell am start -n com.dsh.ramwatch/.MainActivity
             sleep 10
             adb exec-out screencap -p > screen1.png
-            adb shell input tap 540 1490
+            adb shell input tap 465 628
+            sleep 4
+            adb exec-out screencap -p > screen2.png
+            adb shell input tap 540 920
             sleep 2
             adb shell input text "chrome"
             sleep 3
             adb shell input keyevent 111
-            sleep 1
-            adb exec-out screencap -p > screen2.png
+            sleep 2
+            adb exec-out screencap -p > screen3.png
 
       - uses: actions/upload-artifact@v4
         with:
