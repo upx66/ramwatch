@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <!-- ===== 内存总览 ===== -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_card"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MetricLabel"
+                    android:text="已用" />
+
+                <TextView
+                    android:id="@+id/tvUsed"
+                    style="@style/MetricValue"
+                    android:textColor="@color/accent"
+                    android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MetricLabel"
+                    android:text="可用" />
+
+                <TextView
+                    android:id="@+id/tvFree"
+                    style="@style/MetricValue"
+                    android:textColor="@color/good"
+                    android:text="--" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/MetricLabel"
+                    android:text="总量" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    style="@style/MetricValue"
+                    android:text="--" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pbMem"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="16dp"
+            android:max="1000"
+            android:progress="0"
+            android:progressTint="@color/accent"
+            android:progressBackgroundTint="@color/track" />
+
+        <TextView
+            android:id="@+id/tvSwap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/text_sub"
+            android:textSize="12sp"
+            android:text="" />
+    </LinearLayout>
+
+    <!-- ===== 操作条 ===== -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="2dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnSort"
+                style="@style/Chip"
+                android:text="排序：最近使用" />
+
+            <TextView
+                android:id="@+id/btnSystem"
+                style="@style/Chip"
+                android:text="含系统应用" />
+
+            <TextView
+                android:id="@+id/btnNotify"
+                style="@style/Chip"
+                android:text="通知栏常驻" />
+
+            <TextView
+                android:id="@+id/btnRefresh"
+                style="@style/Chip"
+                android:text="刷新" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- ===== 授权提示 ===== -->
+    <LinearLayout
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_banner"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="开启“使用情况访问”后，能看到每个 App 上次在前台的时间，还能看到占用空间。"
+            android:textColor="@color/banner_text"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btnGrant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:padding="6dp"
+            android:text="去开启"
+            android:textColor="@color/accent"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnIgnore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="6dp"
+            android:text="以后再说"
+            android:textColor="@color/text_sub"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- ===== 搜索 ===== -->
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_input"
+        android:hint="搜索应用"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="14dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/text"
+        android:textColorHint="@color/text_sub"
+        android:textSize="14sp" />
+
+    <!-- ===== 应用列表 ===== -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="正在读取应用列表…"
+            android:textColor="@color/text_sub"
+            android:textSize="13sp" />
+    </FrameLayout>
+
+</LinearLayout>

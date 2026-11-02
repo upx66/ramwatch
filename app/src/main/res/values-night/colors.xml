@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg">#0E1116</color>
+    <color name="card">#191E25</color>
+    <color name="text">#F0F3F7</color>
+    <color name="text_sub">#98A2B0</color>
+    <color name="accent">#7AA2FF</color>
+    <color name="good">#45D18B</color>
+    <color name="warn">#F0B44C</color>
+    <color name="track">#262C35</color>
+    <color name="chip">#232A34</color>
+    <color name="input">#191E25</color>
+    <color name="banner_bg">#2A2113</color>
+    <color name="banner_text">#E5BE7C</color>
+    <color name="icon_bg">#1B2A4A</color>
+</resources>
