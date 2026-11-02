@@ -328,7 +328,7 @@ public class MainActivity extends Activity implements AppListAdapter.Listener {
             if (ssm != null) {
                 try {
                     StorageStats st = ssm.queryStatsForPackage(
-                            StorageManager.UUID_DEFAULT, pkg, Process.myUid());
+                            StorageManager.UUID_DEFAULT, pkg, Process.myUserHandle());
                     e.storage = st.getAppBytes() + st.getDataBytes() + st.getCacheBytes();
                 } catch (Exception ex) {
                     e.storage = -1L;
