@@ -255,6 +255,7 @@ public class MainActivity extends Activity implements AppListAdapter.Listener {
         List<AppEntry> out = new ArrayList<>();
         PackageManager pm = getPackageManager();
         boolean usage = hasUsageAccess();
+        adapter.setUsageGranted(usage);
         long now = System.currentTimeMillis();
 
         Map<String, Long> lastUse = new HashMap<>();

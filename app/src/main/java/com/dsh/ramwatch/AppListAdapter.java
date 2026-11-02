@@ -24,6 +24,11 @@ public class AppListAdapter extends BaseAdapter {
     private final LayoutInflater inflater;
     private final Listener listener;
     private final List<AppEntry> data = new ArrayList<>();
+    private boolean usageGranted = false;
+
+    public void setUsageGranted(boolean granted) {
+        this.usageGranted = granted;
+    }
 
     public AppListAdapter(Context ctx, Listener l) {
         this.inflater = LayoutInflater.from(ctx);
@@ -69,7 +74,7 @@ public class AppListAdapter extends BaseAdapter {
 
         final AppEntry e = data.get(position);
         h.name.setText(e.name);
-        h.sub.setText(subtitle(e));
+        h.sub.setText(subtitle(e, usageGranted));
         h.sub.setTextColor(subColor(e));
         if (e.icon != null) {
             h.icon.setImageDrawable(e.icon);
@@ -88,12 +93,14 @@ public class AppListAdapter extends BaseAdapter {
         return e.foreground ? 0xFF12A150 : 0xFF78828F;
     }
 
-    private static String subtitle(AppEntry e) {
+    private static String subtitle(AppEntry e, boolean granted) {
         StringBuilder sb = new StringBuilder();
-        if (e.foreground) {
+        if (!granted) {
+            sb.append("未开启使用情况访问");
+        } else if (e.foreground) {
             sb.append("● 正在前台");
         } else if (e.lastUsed <= 0) {
-            sb.append("近期没打开过");
+            sb.append("30 天内没打开过");
         } else {
             sb.append("上次前台 ").append(ago(e.lastUsed));
         }
