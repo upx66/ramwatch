@@ -38,27 +38,17 @@ jobs:
             sleep 4
             adb exec-out screencap -p > screen2.png
             adb shell input tap 540 920
-            sleep 2
-            adb shell input text "chrome"
             sleep 3
-            adb shell input keyevent 111
-            sleep 2
             adb exec-out screencap -p > screen3.png
+            adb shell input keyevent KEYCODE_BACK
             adb shell appops set com.dsh.ramwatch GET_USAGE_STATS allow
             adb shell am start -n com.android.settings/.Settings
-            sleep 4
+            sleep 3
             adb shell input keyevent KEYCODE_HOME
-            sleep 1
+            adb shell am force-stop com.dsh.ramwatch
+            sleep 2
             adb shell am start -n com.dsh.ramwatch/.MainActivity
-            sleep 6
-            adb shell input tap 540 920
-            adb shell input keyevent KEYCODE_DEL
-            adb shell input keyevent KEYCODE_DEL
-            adb shell input keyevent KEYCODE_DEL
-            adb shell input keyevent KEYCODE_DEL
-            adb shell input keyevent KEYCODE_DEL
-            adb shell input keyevent KEYCODE_DEL
-            sleep 4
+            sleep 8
             adb exec-out screencap -p > screen4.png
 
       - uses: actions/upload-artifact@v4
